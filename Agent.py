@@ -5,14 +5,15 @@ from langchain_openai import ChatOpenAI
 from langchain.agents import create_agent
 from tools import get_goods_info, search_products, get_shipping_info, control_stock, query_order
 from langgraph.checkpoint.memory import InMemorySaver
+import streamlit as st
 
 def init_agent():
     if "DEEPSEEK_API_KEY" in st.secrets:
-    os.environ["DEEPSEEK_API_KEY"] = st.secrets["DEEPSEEK_API_KEY"]
-    os.environ["DEEPSEEK_BASE_URL"] = st.secrets["DEEPSEEK_BASE_URL"]
-else:
-    from dotenv import load_dotenv
-    load_dotenv()
+        os.environ["DEEPSEEK_API_KEY"] = st.secrets["DEEPSEEK_API_KEY"]
+        os.environ["DEEPSEEK_BASE_URL"] = st.secrets["DEEPSEEK_BASE_URL"]
+    else:
+        from dotenv import load_dotenv
+        load_dotenv()
     
     now = datetime.datetime.now()
     is_service_time = 9 <= now.hour < 22
